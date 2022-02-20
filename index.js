@@ -28,7 +28,10 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  //could also make a new array, loop through movies and push movie.title into new array
+  return movies.map((movie) => movie.title);
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +44,15 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  let highestScore = 0;
+  for (let movie of movies) {
+    if (Number(movie.metascore) > highestScore) {
+      highestScore = Number(movie.metascore);
+    }
+  }
+  return highestScore;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +65,10 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  //could also loop through movies array summing all imdb ratings (which is what .reduce is doing here) into a new variable then divide by movies.length
+    return movies.length > 0 ? movies.reduce((total, movie) => total + Number(movie.imdbRating), 0) / movies.length : 0;
+}
 
 /**
  * countByRating()
@@ -67,7 +81,17 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  let movieRatings = {};
+  for (let movie of movies) {
+    if (!movieRatings[movie.rated]) {
+      movieRatings[movie.rated] = 1;
+    } else {
+      movieRatings[movie.rated]++;
+    }
+  }
+  return movieRatings;
+}
 
 /**
  * findById()
@@ -83,7 +107,14 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  for (let movie of movies) {
+    if (movie.imdbID == id) {
+      return movie;
+    }
+  }
+  return null;
+}
 
 /**
  * filterByGenre()
@@ -105,7 +136,15 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, movieGenre) {
+  let matchingMovies = [];
+  for (let movie of movies) {
+    if (movie.genre.toLowerCase().includes(movieGenre.toLowerCase())) {
+      matchingMovies.push(movie);
+    } 
+  }
+  return matchingMovies;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +168,16 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  // i really want to do this with .map
+  let moviesBeforeYear = [];
+  for (let movie of movies) {
+    if (Number(movie.released.slice(movie.released.length -4)) <= year) {
+      moviesBeforeYear.push(movie);
+    }
+  }
+  return moviesBeforeYear;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -142,7 +190,18 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  let highestBoxOffice = 0;
+  let highestBoxMovieIndex;
+  for (let movie in movies) {
+    let convertedPrice = Number(movies[movie].boxOffice.slice(1).split(',').join(''));
+    if (convertedPrice > highestBoxOffice) {
+      highestBoxOffice = convertedPrice;
+      highestBoxMovieIndex = movie;
+    }
+  }
+  return highestBoxOffice > 0 ? movies[highestBoxMovieIndex].title : null;
+}
 
 // Do not change anything below this line.
 module.exports = {
