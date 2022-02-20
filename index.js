@@ -28,7 +28,16 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (!movies) {
+    return movies;
+  }
+  let filmList = [];
+  for (let title of movies) {
+    filmList.push(title.title);
+  }
+  return filmList;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +50,19 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  if (!movies) {
+    return movies;
+  }
+  let highestScore = 0;
+  for (let film of movies) {
+    if (parseInt(film.metascore) > highestScore) {
+      //console.log(film.metascore);
+      highestScore = parseInt(film.metascore);
+    }
+  }
+  return highestScore;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +75,27 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  //console.log(movies.length);
+  if (!movies.length) {
+    return 0;
+  }
+  let imdbSum = 0;
+  let scoreArray = [];
+  let count = 0;
+  for (let film of movies) {
+    for (source of film.ratings) {
+      if (source.source == "Internet Movie Database") {
+        let currentScore = source.value.split("/", 1);
+        scoreArray.push(currentScore);
+      }
+    }
+  }
+  for (score of scoreArray) {
+    imdbSum += parseFloat(score);
+  }
+  return imdbSum / scoreArray.length;
+}
 
 /**
  * countByRating()
@@ -67,7 +108,24 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  if (!movies.length) {
+    return {};
+  }
+
+  let boxOffice = {};
+
+  for (let film of movies) {
+    console.log(film.rated);
+    if (!boxOffice[film.rated]) {
+      boxOffice[film.rated] = 1;
+    } else {
+      boxOffice[film.rated]++;
+    }
+  }
+
+  return boxOffice;
+}
 
 /**
  * findById()
@@ -83,7 +141,7 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {}
 
 /**
  * filterByGenre()
