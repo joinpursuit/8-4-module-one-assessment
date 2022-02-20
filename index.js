@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const { TestWatcher } = require("jest");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -56,14 +57,13 @@ function getAllMovieTitles(movies) {
 function getHighestMetascore(movies) {
   let metaScore = 0;
 
-  for (let i = 0; i < movies.length; i++){
-   metaScore.push(movies[i].metascore);
+
 
 
   return metaScore;
 
 }
-}
+
 
 /**
  * getAverageIMDBRating()
@@ -190,7 +190,7 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
 function getBiggestBoxOfficeMovie(movie) {
   let bigBoxOffMov 
 
-  return 
+  return bigBoxOffMov
 }
 
 // Do not change anything below this line.
