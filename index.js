@@ -89,11 +89,16 @@ function getAverageIMDBRating(movies) {
   }
 
   let averageRating = 0;
-
+  
   for(let i = 0; i < movies.length; i++){
-        averageRating += movies[i].imdbRating 
+    let num = parseInt(movies[i].imdbRating, 10);
+           //console.log(movies[i].imdbRating ) 
+        averageRating += num 
+
+        //console.log(averageRating.toFixed(2))
+        //console.log(Math.floor(averageRating))
   }
-    return averageRating / movies.length; 
+    return Math.floor((averageRating / movies.length)); 
 }
 
 /**
@@ -107,7 +112,27 @@ function getAverageIMDBRating(movies) {
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  if(movies.length === 0){
+    return {};
+  }
+
+  movieRatingCount = {}
+
+  for(let i = 0; i < movies.length; i++){
+    if(movies[i].rated ){
+
+    }
+
+  }
+
+
+
+
+
+
+
+}
 
 /**
  * findById()
