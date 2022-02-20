@@ -92,7 +92,24 @@ return result;
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+let result = 0;
+if (movies.length === 0){
+  return result;
+}
+//console.log(movies.length);
+
+for (let i = 0; i < movies.length; i++){//loops through movies array 
+  //console.log(typeof movies[i].imdbRating);
+  result = result + parseInt(movies[i].imdbRating);//this should be right 
+}
+
+
+//console.log(result);
+
+
+return result/movies.length;//total of the movies IMDB rating  /by the the amount of the movies
+}
 
 /**
  * countByRating()
@@ -105,7 +122,27 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+let result = {};
+
+if (movies.length === 0){
+  return result;
+}
+
+for (let i = 0;i < movies.length; i++){
+  if (result[movies[i].rated]){
+    result[movies[i].rated]++;
+  } else {
+    result[movies[i].rated] = 1;
+  }
+
+}
+
+
+
+
+return result;
+}
 
 /**
  * findById()
