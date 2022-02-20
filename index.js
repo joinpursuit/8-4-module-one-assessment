@@ -29,15 +29,18 @@ const exampleMovies = require("./movies");
     ];
  */
 function getAllMovieTitles(movies) {
+  //if there is no movie return empty array
   if (movies.length === 0){
     return [];
   }
-
+  //creates a variable to hold all movie titles
   let movieTitles = [];
-
+  //loop through the movies array 
   for(let i = 0; i < movies.length; i++){
+    //push movie titles at iteration to the empty array 
     movieTitles.push(movies[i].title)
   }
+  //return array after all the movie titles have been pushed in
     return movieTitles;
 }
 
@@ -56,19 +59,23 @@ function getAllMovieTitles(movies) {
  *  //> 96
  */
 function getHighestMetascore(movies) {
+  //if there is no movie return 0
   if(movies.length === 0){
     return 0;
   }
-
+  //variable to hold the highest meta to equal 0 for comparison 
   let highestMeta = 0; 
 
-
+  //loop through movies array 
   for(let i = 0; i < movies.length; i++){
+    //conditional statement if movie at iteration metascore is greater than highestMeta  
     if(movies[i].metascore > highestMeta){
+      //now that iteration of metascore is not the highest
       highestMeta = movies[i].metascore
     }
 
   }
+  //return the highest meta score as a number instead of string 
     return Number(highestMeta);
 }
 
@@ -84,15 +91,19 @@ function getHighestMetascore(movies) {
  *  //> 7.76
  */
 function getAverageIMDBRating(movies) {
+
+  //if there are no movies return 0
   if(movies.length === 0){
     return 0; 
   }
-
+  //create a variable to hole the average rating equal to 0
   let averageRating = 0;
-  
+  //loop through the movies array
   for(let i = 0; i < movies.length; i++){
-    let num = parseInt(movies[i].imdbRating, 10);
+    //create a variable called num to represent movies iteration imdbRating as a number 
+    let num = Numbers(movies[i].imdbRating);
            //console.log(movies[i].imdbRating ) 
+           console.log(num)
         averageRating += num 
 
         //console.log(averageRating.toFixed(2))
@@ -120,18 +131,13 @@ function countByRating(movies) {
   movieRatingCount = {}
 
   for(let i = 0; i < movies.length; i++){
-    if(movies[i].rated ){
+    console.log(movies[i].rated)
 
-    }
 
+    movieRatingCount[movies[i].rated] = movieRatingCount[movies[i].rated] ? movieRatingCount[movies[i].rated] + 1 : 1;
   }
 
-
-
-
-
-
-
+  return movieRatingCount;
 }
 
 /**
@@ -148,7 +154,19 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  if(movies.length === 0 || id !== id){
+    return null;
+  }
+    for(let i = 0; i <movies.length; i++){
+      if(movies[i].imdbID === id){
+        return movies[i];
+      } else {
+        return null;
+      }
+    }
+
+}
 
 /**
  * filterByGenre()
@@ -170,7 +188,26 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  if(movies.length === 0 || genre !== genre){
+    return [];
+  }
+    let noMatch = [];
+    letGenreMatch = [];
+
+    for(let i = 0; i < movies.length;i++ ){
+      if(movies[i].genre === genre){
+        
+        letGenrematch.push(movies[i].title);
+    
+      } else {
+        return noMatch;
+      }
+    
+         
+    }
+      //return letGenreMatch; 
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -194,7 +231,21 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+
+  let movieRelease = [];
+
+  //console.log(year);
+  for (let i= 0; i < movies.length; i++){
+    //console.log(movies[i].released) - check
+    console.log(movies[i])
+    if(movies[i].released <= year){
+      movieRelease = movies[i]
+    }
+
+  }
+    return movieRelease
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -207,7 +258,25 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+
+//TOY STORY 4 HAD THE BIGGER BOX OFFICE THAN INCREDIBLES 2 I DON'T KNOW WHY THE TEST IS NOT PASSING
+function getBiggestBoxOfficeMovie(movies) {
+
+  if (movies.length === 0){
+    return null;
+  }
+
+  let highesBoxOffice = '';
+
+  for(let i = 0; i < movies.length; i++){
+    if(movies[i].boxOffice > highesBoxOffice){
+      highesBoxOffice = movies[i].title
+      //console.log(movies[i].title)
+    }
+  }
+  //console.log(highesBoxOffice)
+  return highesBoxOffice;
+}
 
 // Do not change anything below this line.
 module.exports = {
