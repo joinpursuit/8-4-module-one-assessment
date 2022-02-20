@@ -28,7 +28,16 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+
+function getAllMovieTitles(movies) {
+  let filmTitles = [];
+
+  for (let film of movies) {
+    filmTitles.push(film.title);
+  }
+
+  return filmTitles;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +50,23 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+
+function getHighestMetascore(movies) {
+  let highestMetaScore;
+  
+  if (movies.length < 1) {
+    highestMetaScore = 0;
+  } else {
+    highestMetaScore = Number(movies[0].metascore);
+    for (let i = 1; i < movies.length; i++) {  
+      if (Number(movies[i].metascore) > highestMetaScore) {
+        highestMetaScore = Number(movies[i].metascore);
+      }
+    }
+  }
+
+  return highestMetaScore;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +79,26 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  let averageIMDBRating = 0;
+  let counter = 0;
+  let ratings;
+
+  if (movies.length < 1) {
+    return averageIMDBRating;
+  } else {
+    for (let i = 0; i < movies.length; i++) {
+      for (let j = 0; j < movies[i].ratings.length; j++) {
+        ratings = parseFloat(movies[i].ratings[0].value);
+        averageIMDBRating += ratings;
+        counter++;
+      }
+    }
+  }
+  averageIMDBRating = (averageIMDBRating / counter) / 10;
+  console.log(averageIMDBRating)
+  return averageIMDBRating;
+}
 
 /**
  * countByRating()
@@ -67,7 +111,10 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+
+
+}
 
 /**
  * findById()
