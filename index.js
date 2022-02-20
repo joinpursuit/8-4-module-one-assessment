@@ -28,7 +28,22 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+//1.pass in parameter
+//2. console.log movies ===> movies.title
+//3. return []
+//4. create loop to get movies.title from array
+//5. put movies titles in to the variable used to store info
+//6 return the variable
+const getAllMovieTitles = (movies) => {
+  if (movies.length === 0) {
+    return [];
+  }
+  let arrayOfMovieNames = [];
+  for (let movie of movies) {
+    arrayOfMovieNames.push(movie.title);
+  }
+  return arrayOfMovieNames;
+};
 
 /**
  * getHighestMetascore()
@@ -41,8 +56,24 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
 
+const getHighestMetascore = (movies) => {
+  if (movies.length === 0) {
+    return 0;
+  }
+  let highestScore = 0;
+  for (let object of movies) {
+    let score = object.metascore;
+    for (let object of score) {
+      if (score === "metascore") {
+        if (object.value > highestScore) {
+          highestScore = object.value;
+        }
+      }
+    }
+  }
+  return highestScore;
+};
 /**
  * getAverageIMDBRating()
  * -----------------------------
@@ -54,7 +85,20 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+const getAverageIMDBRating = (movies) => {
+  if (movies.length === 0) {
+    return 0;
+  }
+  let sum = 0;
+  for (let object of movies) {
+    //gives the array of object
+    if (object.imdbRating === "imdbRating") {
+      sum += object.imdbRating;
+    }
+  }
+
+  return sum / movies.length;
+};
 
 /**
  * countByRating()
@@ -67,7 +111,17 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+const countByRating = (movies) => {
+  if (movies.length === 0) {
+    return {};
+  }
+  let types = {};
+  for (let object of movies) {
+    if (typeof types[object.type] === "undefined") {
+    
+  }
+  return types;
+}
 
 /**
  * findById()
