@@ -141,7 +141,7 @@ function findById(movies, id) {
   for(let i = 0; i < movies.length; i++){
 
     if(movies[i].imdbID === id){
-      return movies[i];
+      movName = movies[i];
     }
     else{
       return movName;
@@ -242,8 +242,11 @@ function getBiggestBoxOfficeMovie(movies) {
   }
 
   for(let i = 0; i < movies.length; i++){
+
     let bigMula = 0;
     let mula = movies[i].boxOffice.split('$');
+
+    // console.log(mula);
   for(let j = 0; j < mula.length; j++){
     if(mula[j] > bigMula){
       bigMula = mula[j];
