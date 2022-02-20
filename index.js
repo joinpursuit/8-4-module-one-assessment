@@ -220,10 +220,11 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  //> "Incredibles 2"
  */
 function getBiggestBoxOfficeMovie(movies) {
-  let movieName = null;
-  let boxOfficeArr = [];
-  let movieTitles = [];
+  let movieName = null; //should return `null` if there are no movies
+  let boxOfficeArr = []; //create an empty array to hold the boxOffice amounts as numbers
+  let movieTitles = []; //create an empty array to hold the titles that match the boxOffice amounts
 
+  //loop through the movies array to convert all boxOffice strings into numbers and push values into empty arrays
   for(let i = 0; i < movies.length; i++){
     let boxOfficeNum = movies[i].boxOffice.replace('$', '');
     boxOfficeNum = Number(boxOfficeNum.replace(/,/g, ''));
@@ -231,18 +232,20 @@ function getBiggestBoxOfficeMovie(movies) {
     movieTitles.push(movies[i].title);
   }
 
+  //create a temp var to hold to highest boxOffice amount so far
   let highest = boxOfficeArr[0];
 
+  //loop through the boxOffice array to find the highest amount
   for(let high of boxOfficeArr){
     if(high > highest){
       highest = high;
     }
   }
   
-  
+  //loop through the movitTitles array to match the index of the movie name to the index of the highest boxOffice amount
   for(let i = 0; i < movieTitles.length; i++){
     if(movieTitles.indexOf(movieTitles[i]) === boxOfficeArr.indexOf(highest)){
-      movieName = movieTitles[i]
+      movieName = movieTitles[i];
     }
   }
 
