@@ -139,8 +139,6 @@ for (let i = 0;i < movies.length; i++){
 }
 
 
-
-
 return result;
 }
 
@@ -158,7 +156,25 @@ return result;
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies,id) {
+let result = null;
+
+if (movies.length === 0){
+  return result;
+}
+
+
+for (i = 0; i < movies.length; i++){
+  if (movies[i].imdbID === id){
+    result = movies[i];
+  }
+
+
+}
+
+
+return result;
+}
 
 /**
  * filterByGenre()
