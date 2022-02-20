@@ -221,7 +221,7 @@ function getBiggestBoxOfficeMovie(movies) {
     return null;
   } 
   for (let i = 1; i < movies.length; i++) {
-    if (Number(movies[i].boxOffice) > Number(mostMoney.boxOffice)) {
+    if (Number(movies[i].boxOffice.substr(1).replace(/,/g, "")) > Number(mostMoney.boxOffice.substr(1).replace(/,/g, ""))) {
       mostMoney = movies[i];
       }
     } return mostMoney.title;
