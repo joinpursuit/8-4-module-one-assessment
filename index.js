@@ -94,6 +94,7 @@ return result;
  */
 function getAverageIMDBRating(movies) {
 let result = 0;
+
 if (movies.length === 0){
   return result;
 }
@@ -101,7 +102,8 @@ if (movies.length === 0){
 
 for (let i = 0; i < movies.length; i++){//loops through movies array 
   //console.log(typeof movies[i].imdbRating);
-  result = result + parseInt(movies[i].imdbRating);//this should be right 
+  result+= Number(movies[i].imdbRating);//parseInt did not work so change to Number 
+  //console.log(result);
 }
 
 
