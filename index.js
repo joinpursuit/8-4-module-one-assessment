@@ -206,17 +206,15 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  //> "Incredibles 2"
  */
 function getBiggestBoxOfficeMovie(movies) {
-  let biggestBoxOfficeMovieAmount = '0'
+  let biggestBoxOfficeMovieAmount = 0
   let biggestBoxOfficeMovieName = null;
   for (let i = 0; i < movies.length; i++) {
-    let movieBoxOffice = movies[i].boxOffice.substring(1)
-    if (biggestBoxOfficeMovieAmount < parseInt(movieBoxOffice) * 1) {
-      biggestBoxOfficeMovieAmount = parseInt(movieBoxOffice) * 1;
+    let movieBoxOffice = parseInt(movies[i].boxOffice.substring(1)) 
+    if (biggestBoxOfficeMovieAmount < movieBoxOffice) {
+      biggestBoxOfficeMovieAmount = movieBoxOffice;
       biggestBoxOfficeMovieName = movies[i].title;
-   }
-  
+    }
   }
-
   return biggestBoxOfficeMovieName;
 }
 
