@@ -168,15 +168,16 @@ function findById(movies, id) {
  */
 function filterByGenre(movies, genre) {
   let boxOffice = [];
-  if (!movies.length){
+  if (!movies.length) {
     return [];
   }
   genre = genre.toLowerCase();
-  for (let film of movies){
-    let genre2 = film.genre.split(',');
-    for (let type of genre2){
+  for (let film of movies) {
+    let genre2 = film.genre.split(",");
+    for (let type of genre2) {
       type = type.toLowerCase();
-      if (type.trim() == genre){ //Forgot to account for the spaces after the comma - it works, but definitely would appreciate input on if there is a "better" way.
+      if (type.trim() == genre) {
+        //Forgot to account for the spaces after the comma - it works, but definitely would appreciate input on if there is a "better" way.
         boxOffice.push(film);
       }
     }
@@ -209,9 +210,9 @@ function filterByGenre(movies, genre) {
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   let boxOffice = [];
 
-  for (let film of movies){
+  for (let film of movies) {
     let released = film.released.split(" ");
-    if (parseInt(released[2]) <= year){
+    if (parseInt(released[2]) <= year) {
       boxOffice.push(film);
     }
   }
@@ -230,8 +231,24 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {
+function getBiggestBoxOfficeMovie(movies) {
+  let biggestPull = 0;
+  let biggestDraw;
 
+  if (!movies.length){
+    return null;
+  }
+
+  for (let film of movies) {
+    let money = film.boxOffice.substring(1);
+    money = money.split(",");
+    money = Number(money.join('')); // I know I can do the prev. 3 lines in one but I definitely need practice on that
+    if (money > biggestPull){
+      biggestPull = money;
+      biggestDraw = film.title;
+    }    
+  }
+  return biggestDraw;
 }
 
 // Do not change anything below this line.
