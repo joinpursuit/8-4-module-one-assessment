@@ -281,7 +281,7 @@ if (movies.length === 0){
 
 for (i = 0; i < movies.length; i++){
 //  let boxOfficeString = movies[i].boxOffice.substr(1,movies[i].boxOffice.length);
-let boxOfficeString = movies[i].boxOffice.replace(/[.,$]/g,"")
+let boxOfficeString = movies[i].boxOffice.replace(/[.,$]/g,"")//replace $ period and comma to whitespace so i can convert to number
 //console.log(boxOfficeString);
   
   //console.log(typeof (movies[i].boxOffice));
