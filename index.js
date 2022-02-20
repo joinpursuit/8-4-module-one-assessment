@@ -28,7 +28,15 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let movieTitles = [];
+
+  for(let movie of movies){
+    movieTitles.push(movie.title)
+  }
+
+  return movieTitles;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +49,17 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  let highMeta = 0;
+
+  for(let movie of movies){
+    if(movie.metascore > highMeta){
+      highMeta = Number(movie.metascore);
+    }
+  }
+
+  return highMeta;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +72,19 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  if(movies.length === 0){
+    return 0;
+  }
+
+  let avgSum = 0;
+
+  for(let movie of movies){
+    avgSum += Number(movie.imdbRating);
+  }
+
+  return avgSum / movies.length;
+}
 
 /**
  * countByRating()
@@ -67,7 +97,19 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  let movieObj = {};
+
+  for(let movie of movies){
+    if(!movieObj[movie.rated]){
+      movieObj[movie.rated] = 1;
+    } else{
+      movieObj[movie.rated] += 1;
+    }
+  }
+
+  return movieObj;
+}
 
 /**
  * findById()
@@ -83,7 +125,17 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  let filmObj = null;
+
+  for(let movie of movies){
+    if(movie.imdbID === id){
+      filmObj = movie;
+    }
+  }
+
+  return filmObj;
+}
 
 /**
  * filterByGenre()
@@ -105,7 +157,19 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  let movieGenres = [];
+
+  for(let movie of movies){
+    let movieStr = movie.genre.toLowerCase();
+
+    if(movieStr.includes(genre.toLowerCase())){
+      movieGenres.push(movie)
+    }
+  }
+
+  return movieGenres;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +193,20 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  let movieReleaseYear = [];
+
+  for(let movie of movies){
+    let releaseDate = movie.released.split(' ');
+    let yearNum = Number(releaseDate[2])
+
+    if(yearNum <= year){
+      movieReleaseYear.push(movie)
+    }
+  }
+
+  return movieReleaseYear;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -142,7 +219,38 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  let movieName = null; //should return `null` if there are no movies
+  let boxOfficeArr = []; //create an empty array to hold the boxOffice amounts as numbers
+  let movieTitles = []; //create an empty array to hold the titles that match the boxOffice amounts
+
+  //loop through the movies array to convert all boxOffice strings into numbers and push values into empty arrays
+  for(let i = 0; i < movies.length; i++){
+    let boxOfficeNum = movies[i].boxOffice.replace('$', '');
+    boxOfficeNum = Number(boxOfficeNum.replace(/,/g, ''));
+    boxOfficeArr.push(boxOfficeNum);
+    movieTitles.push(movies[i].title);
+  }
+
+  //create a temp var to hold to highest boxOffice amount so far
+  let highest = boxOfficeArr[0];
+
+  //loop through the boxOffice array to find the highest amount
+  for(let high of boxOfficeArr){
+    if(high > highest){
+      highest = high;
+    }
+  }
+  
+  //loop through the movitTitles array to match the index of the movie name to the index of the highest boxOffice amount
+  for(let i = 0; i < movieTitles.length; i++){
+    if(movieTitles.indexOf(movieTitles[i]) === boxOfficeArr.indexOf(highest)){
+      movieName = movieTitles[i];
+    }
+  }
+
+  return movieName;
+}
 
 // Do not change anything below this line.
 module.exports = {
