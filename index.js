@@ -130,7 +130,25 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+
+  let movName = null;
+
+  if(movies.length < 1){
+    return movName;
+  }
+
+  for(let i = 0; i < movies.length; i++){
+
+    if(movies[i].imdbID != id){
+      return movName;
+    }
+    else{
+      movName = movies[i];
+    }
+    }
+    return movName;
+  }
 
 /**
  * filterByGenre()
@@ -152,7 +170,21 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+
+  let matches = [];
+
+  for(let i = 0; i < movies.length; i++){
+    let lowParam = genre.toLocaleLowerCase();
+    let lowGenre = movies[i].genre.toLocaleLowerCase().split(', ');
+    for(let j = 0; j < lowGenre.length; j++){
+      if(lowParam === lowGenre[j]){
+        matches.push(movies[i]);
+      }
+    }
+  }
+  return matches;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
