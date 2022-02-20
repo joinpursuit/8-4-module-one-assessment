@@ -28,7 +28,16 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let movieTitles = [];
+  if (movies.length === 0) {
+    movieTitles;
+  }
+  for (let names of movies) {
+  movieTitles.push(names.title);
+  }
+  return movieTitles;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +50,20 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  let highestScore = 0;
+  
+  if (movies.length === 0) {
+    return highestScore;
+  } else {
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].metascore > highestScore) {
+        highestScore = Number(movies[i].metascore)
+      }
+    }
+  } return highestScore;
+}
+ 
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +76,20 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  let avgRating = 0;
+  let sumOfRatings = 0;
+  
+  if (movies.length === 0) {
+     avgRating;
+  } else { 
+    for (let i = 0; i < movies.length; i++) {
+      sumOfRatings += Number(movies[i].imdbRating)
+      avgRating = (sumOfRatings / movies.length)
+    }
+  }
+    return avgRating;
+}
 
 /**
  * countByRating()
@@ -67,7 +102,15 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  let movieRatings = {};
+  
+  for (let i = 0; i < movies.length; i++) {
+    let ratingCount = movies[i].rated
+    movieRatings[ratingCount] = (movieRatings[ratingCount] + 1) || 1
+  }
+  return movieRatings;
+}
 
 /**
  * findById()
@@ -83,7 +126,18 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  let idMatch = null;
+  
+  if (movies.length === 0) {
+     idMatch;
+  } 
+    for (let i = 0; i < movies.length; i++) {
+      if (movies[i].imdbID === id) {
+      idMatch = movies[i];
+    }
+  } return idMatch;
+}
 
 /**
  * filterByGenre()
@@ -105,7 +159,14 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies,genre) {
+  let genreMatch = [];
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].genre.toLowerCase().includes(genre.toLowerCase())) {
+      genreMatch.push(movies[i])
+    } 
+  } return genreMatch;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +190,18 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies,year) {
+  let releaseYearOrBefore = []; 
+  let yearReleased;
+  for (let i = 0; i < movies.length; i++) {
+      yearReleased = movies[i].released.substr(movies[i].released.length-4) 
+      if (yearReleased <= year) {
+        releaseYearOrBefore.push(movies[i])
+    }
+  }
+   return releaseYearOrBefore;
+}
+
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -142,7 +214,19 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  let mostMoney = movies[0];
+  
+  if (movies.length === 0) {
+    return null;
+  } 
+  for (let i = 1; i < movies.length; i++) {
+    if (Number(movies[i].boxOffice) > Number(mostMoney.boxOffice)) {
+      mostMoney = movies[i];
+      }
+    } return mostMoney.title;
+  }
+
 
 // Do not change anything below this line.
 module.exports = {
