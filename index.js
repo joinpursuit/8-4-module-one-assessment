@@ -244,12 +244,12 @@ function getBiggestBoxOfficeMovie(movies) {
   for(let i = 0; i < movies.length; i++){
     let bigMula = 0;
     let mula = movies[i].boxOffice.split('$');
-  for(let j = 0; j < movies[i].mula.length; j++){
+  for(let j = 0; j < mula.length; j++){
     if(mula[j] > bigMula){
       bigMula = mula[j];
-      movie = movies[i].title;
     }
-    }
+  }
+  movie = movies[i].title;
 
   }
 
