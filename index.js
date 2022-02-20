@@ -3,6 +3,7 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
+const movies = require("./movies");
 const exampleMovies = require("./movies");
 // Do not change the line above.
 
@@ -28,7 +29,13 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let allMovies = []
+  for( let i=0 ; i < movies.length ; i++){
+    allMovies.push(movies[i].title)
+  }
+  return allMovies
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +48,15 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  let highestMetascore = 0
+  for ( let i = 0; i < movies.length; i++){
+      if (movies[i].metascore > highestMetascore){
+        highestMetascore = movies[i].metascore
+      }
+  }
+  return parseInt(highestMetascore)
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,8 +69,18 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
-
+function getAverageIMDBRating(movies) {
+  allAverages = 0
+  for (let i = 0; i < movies.length; i++ ){
+    if ( movies[i].imdbRating ){
+  allAverages += parseFloat(movies[i].imdbRating) ;
+  }
+  else {
+    return 0
+  }
+}
+return allAverages / movies.length 
+}
 /**
  * countByRating()
  * -----------------------------
@@ -67,7 +92,13 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  let movieRated = {}
+  for (let i = 0; i< movies.length; i++){
+  movieRated[movies[i].rated] = (movieRated[movies[i].rated] || 0 ) + 1
+}
+return movieRated
+}
 
 /**
  * findById()
@@ -83,12 +114,20 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies,id) {
+  let specificMovie = null
+  for (let i=0; i<movies.length; i++){
+    if (movies[i].imdbID === id){
+      specificMovie = movies[i]
+    }
+  }
+  return specificMovie
+}
 
 /**
  * filterByGenre()
  * -----------------------------
- * Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty or no movies match the inputted `genre`, return `[]`.
+* Returns all movie objects with a matching genre. Case-insensitive. If the inputted `movies` array is empty or no movies match the inputted `genre`, return `[]`.
  * @param {Object[]} movies - An array of movies. See the `movies.js` file for an example of this array.
  * @param {string} genre - The genre of a movie. (e.g. "Fantasy")
  * @returns {Object[]} An array of movies where at least one of the genres matches the `genre` inputted.
@@ -105,7 +144,15 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies,genre) {
+  let movieGenre = []
+  for(let i = 0; i < movies.length; i++){
+  if ( movies[i].genre === genre ){
+moviesGenre.push(movies[i])
+  } 
+}
+return movieGenre
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +176,17 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(year,movie) {
+  let releasedYear = []
+  for (let i=0 ; i < movies.length; i++){
+    if (movies[i].year >= year ){
+releasedYear.push(movie[i].title)
+    }
+    
+  }
+
+  return releasedYear
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -142,7 +199,17 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  let biggestMovie = ``
+  let movieNumber = 0
+  for (let i=0; i < movies.length; i++){
+    if ( movies[i].boxOffice > movieNumber ){
+      movieNumber = parseInt(movies[i].boxOffice)
+      biggestMovie = movies[i].title
+    }
+  }
+  return biggestMovie
+}
 
 // Do not change anything below this line.
 module.exports = {
