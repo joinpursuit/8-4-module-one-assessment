@@ -28,7 +28,24 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+let result = [];
+
+if (movies.length === 0){
+  return result;
+}
+
+for (movie of movies){
+  result.push(movie.title);
+//console.log(movie.title);
+
+}
+
+
+
+
+return result;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +58,28 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+let result = 0;
+let highestScore =  0;
+
+if (movies.length === 0){
+  return result;
+}
+
+for (let i = 0; i < movies.length; i++){
+  //console.log(movie.ratings[2].value);
+  //console.log(parseInt(movie.ratings[2].value));
+  if (parseInt(movies[i].ratings[2].value) > highestScore){
+    highestScore = parseInt(movies[i].ratings[2].value);
+    result = parseInt(highestScore);
+  }
+}
+
+//console.log(typeof result);
+
+
+return result;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +92,26 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+let result = 0;
+
+if (movies.length === 0){
+  return result;
+}
+//console.log(movies.length);
+
+for (let i = 0; i < movies.length; i++){//loops through movies array 
+  //console.log(typeof movies[i].imdbRating);
+  result+= Number(movies[i].imdbRating);//parseInt did not work so change to Number 
+  //console.log(result);
+}
+
+
+//console.log(result);
+
+
+return result/movies.length;//total of the movies IMDB rating  /by the the amount of the movies
+}
 
 /**
  * countByRating()
@@ -67,7 +124,25 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+let result = {};
+
+if (movies.length === 0){
+  return result;
+}
+
+for (let i = 0;i < movies.length; i++){
+  if (result[movies[i].rated]){
+    result[movies[i].rated]++;
+  } else {
+    result[movies[i].rated] = 1;
+  }
+
+}
+
+
+return result;
+}
 
 /**
  * findById()
@@ -83,7 +158,25 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies,id) {
+let result = null;
+
+if (movies.length === 0){
+  return result;
+}
+
+
+for (i = 0; i < movies.length; i++){
+  if (movies[i].imdbID === id){
+    result = movies[i];
+  }
+
+
+}
+
+
+return result;
+}
 
 /**
  * filterByGenre()
@@ -105,7 +198,24 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+let result = [];
+if (movies.length === 0){
+  return result;
+}
+
+
+for (i = 0; i < movies.length; i++){
+  //console.log(movies[i].genre.toLowerCase());
+  if (movies[i].genre.toLowerCase().includes(genre.toLowerCase())  ){
+    result.push(movies[i])
+  }
+}
+
+
+
+return result;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +239,26 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies,year) {
+let result = [];
+if (movies.length === 0){
+  return result;
+}
+
+for (i = 0; i < movies.length; i++){
+  let movieYear = movies[i].released;//get the string of the movie release date
+  let newYear = movieYear.substr(movieYear.length-4,movieYear.length);//cut the string so I can get the year part only
+  //console.log( newYear);
+ if (parseInt(newYear) <= year){
+result.push(movies[i]);
+ }
+
+
+}
+
+
+return result;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -142,7 +271,30 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+let result = "";
+let biggestProfit = 0;
+
+if (movies.length === 0){
+  return null;
+}
+
+for (i = 0; i < movies.length; i++){
+//  let boxOfficeString = movies[i].boxOffice.substr(1,movies[i].boxOffice.length);
+let boxOfficeString = movies[i].boxOffice.replace(/[.,$]/g,"")//replace $ period and comma to whitespace so i can convert to number
+//console.log(boxOfficeString);
+  
+  //console.log(typeof (movies[i].boxOffice));
+  if (parseInt(boxOfficeString) > biggestProfit){
+    biggestProfit = parseInt(boxOfficeString);
+    result = movies[i].title;
+  }
+}
+
+
+
+return result;
+}
 
 // Do not change anything below this line.
 module.exports = {
