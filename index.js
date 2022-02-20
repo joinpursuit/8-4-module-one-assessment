@@ -82,7 +82,6 @@ function getAverageIMDBRating(movies) {
   }
   let imdbSum = 0;
   let scoreArray = [];
-  let count = 0;
   for (let film of movies) {
     for (source of film.ratings) {
       if (source.source == "Internet Movie Database") {
@@ -112,11 +111,8 @@ function countByRating(movies) {
   if (!movies.length) {
     return {};
   }
-
   let boxOffice = {};
-
   for (let film of movies) {
-    console.log(film.rated);
     if (!boxOffice[film.rated]) {
       boxOffice[film.rated] = 1;
     } else {
@@ -142,8 +138,8 @@ function countByRating(movies) {
     };
  */
 function findById(movies, id) {
-  for (let film of movies){
-    if(film.imdbID == id){
+  for (let film of movies) {
+    if (film.imdbID == id) {
       return film;
     }
   }
@@ -170,7 +166,23 @@ function findById(movies, id) {
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  let boxOffice = [];
+  if (!movies.length){
+    return [];
+  }
+  genre = genre.toLowerCase();
+  for (let film of movies){
+    let genre2 = film.genre.split(',');
+    for (let type of genre2){
+      type = type.toLowerCase();
+      if (type.trim() == genre){ //Forgot to account for the spaces after the comma - it works, but definitely would appreciate input on if there is a "better" way.
+        boxOffice.push(film);
+      }
+    }
+  }
+  return boxOffice;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -194,7 +206,18 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  let boxOffice = [];
+
+  for (let film of movies){
+    let released = film.released.split(" ");
+    if (parseInt(released[2]) <= year){
+      boxOffice.push(film);
+    }
+  }
+
+  return boxOffice;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -207,7 +230,9 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie() {
+
+}
 
 // Do not change anything below this line.
 module.exports = {
