@@ -173,22 +173,15 @@ function findById(movies, id) {
  */
 function filterByGenre(movies, genre) {
   let moviesGenre = [];
- 
-  for (let i = 0; i < movies.length; i++){
-    moviesGenre = (movies[i].genre).split(",");
-  }
-  for (let i = 0; i < movies.length; i++){
-    for (let j = 0; j < moviesGenre.length; j++){
-      if (moviesGenre[j] === genre) {
-       
-      } 
+  let newGenre = (genre.slice(genre.charAt(0),1)).toUpperCase() + (genre.slice(1,genre.length)).toLowerCase();
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].genre.includes(newGenre)) {
+     moviesGenre.push(movies[i]);
     }
   }
-  if (!moviesGenre[genre]){
-    return [];
-  }
- // return moviesGenre;
+  return moviesGenre;
 }
+
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
