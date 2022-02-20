@@ -140,11 +140,11 @@ function findById(movies, id) {
 
   for(let i = 0; i < movies.length; i++){
 
-    if(movies[i].imdbID != id){
-      return movName;
+    if(movies[i].imdbID === id){
+      return movies[i];
     }
     else{
-      movName = movies[i];
+      return movName;
     }
     }
     return movName;
@@ -233,7 +233,28 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+
+  let movie = "";
+
+  if(movies.length < 1){
+    return null;
+  }
+
+  for(let i = 0; i < movies.length; i++){
+    let bigMula = 0;
+    let mula = movies[i].boxOffice.split('$');
+  for(let j = 0; j < movies[i].mula.length; j++){
+    if(mula[j] > bigMula){
+      bigMula = mula[j];
+      movie = movies[i].title;
+    }
+    }
+
+  }
+
+  return movie;
+}
 
 // Do not change anything below this line.
 module.exports = {
