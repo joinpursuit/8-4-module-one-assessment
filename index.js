@@ -28,7 +28,19 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  let title = [] 
+  for (let name of movies){
+    if (!name.title){
+      return title
+    }else{
+    title.push(name.title)
+    }
+  }
+return title 
+}
+  
+
 
 /**
  * getHighestMetascore()
@@ -41,7 +53,15 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+ function getHighestMetascore(movies) {
+  let highest = 0
+  for (let i = 0; i< movies.length; i++){
+    if (movies[i].metascore > highest){
+      highest = parseInt(movies[i].metascore)
+        }
+    }
+return highest
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +74,17 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+
+ 
+ function getAverageIMDBRating(movies) {
+  total = 0
+  for (let i = 0; i< movies.length; i ++){
+      if (movies[i].imdbRating){
+         total += (movies[i].imdbRating)/movies.length
+      }
+   }
+   return Number(total.toFixed(2))
+}
 
 /**
  * countByRating()
@@ -67,7 +97,20 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+ function countByRating(movies) {
+  let rate = {};
+  for(let i = 0; i < movies.length; i++){
+    for(let j = 0; j < movies[i].rated.length; j++){
+      if(!rate[movies[i].rated[j]]){
+        rate[movies[i].rated[j]] = 1;
+      }else{
+        rate[movies[i].rated[j]]++;
+      }
+    }
+  }
+  return rate
+}
+
 
 /**
  * findById()
@@ -83,7 +126,16 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+    function findById(movies, id) {
+      let movId = null;
+         for (let i = 0; i < movies.length;  i++){
+            if (movies[i].imdbID === id){
+              movId = movies[i];
+         }
+     }
+         return movId;
+  };
+
 
 /**
  * filterByGenre()
@@ -105,7 +157,21 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+
+  function filterByGenre(movies, genres) {
+    let byGen = [];
+    if (!genres){
+      return byGen
+        }
+   for (let i = 0; i < movies.length; i++){
+        if (movies[i].genre.toLowerCase().includes(genres.toLowerCase()) )
+              byGen.push(movies[i])
+        } 
+        return byGen
+      }
+  
+
+
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
