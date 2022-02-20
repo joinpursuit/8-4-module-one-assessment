@@ -92,15 +92,16 @@ function getAverageIMDBRating(movies) {
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating(movies) { 
+function countByRating(movies) {
   let rated = {};
   let ratedCount = 0
-  for (let i = 0; i < movies.length; i++){
-    if(movies[i].rated){
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].rated) {
       rated[movies[i].rated] = ratedCount++
     }
   }
 }
+//this one was the hardest to resolve.
 
 /**
  * findById()
