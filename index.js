@@ -196,7 +196,24 @@ return result;
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+let result = [];
+if (movies.length === 0){
+  return result;
+}
+
+
+for (i = 0; i < movies.length; i++){
+  //console.log(movies[i].genre.toLowerCase());
+  if (movies[i].genre.toLowerCase().includes(genre.toLowerCase())  ){
+    result.push(movies[i])
+  }
+}
+
+
+
+return result;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
