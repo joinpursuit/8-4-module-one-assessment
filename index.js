@@ -28,7 +28,19 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  //  define your accumulator to a default value
+  // return all movies with a release year equal to or less than the given year.
+  // I am working with an array of object with movie title
+  // Define your loop
+  // write the if statement or condition if needed
+  // Then return my accumulator
+ let allMovieTitles = [];
+   for (let i = 0; i < movies.length; i++) {
+    allMovieTitles.push(movies[i].title);
+  }
+  return allMovieTitles;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +53,24 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+// return the highest metascore 
+// defirn your accumulator annd return it 
+// I want to loop through the array of movies to get the value of the highest metascore
+// then return the accumulator
+ let highestScore = 0;
+ 
+ for (let i = 0; i < movies.length; i++) {
+   {
+   if (movies[i].metascore > highestScore) {
+     highestScore = Number(movies[i].metascore);
+   }
+  }
+ }
+  return highestScore;
+  }
+
+
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +83,20 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  let score = 0;
+  let count = 0
+  if (movies.length < 1) {
+    return 0;
+  }
+  for (let i = 0; i < movies.length; i++) {
+
+      score += Number(movies[i].imdbRating);
+     count += 1
+    
+  }
+  return (score/count)
+}
 
 /**
  * countByRating()
@@ -67,7 +109,17 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+let countNum = {};
+for (let i = 0; i < movies.length; i++) {
+  if (!countNum[movies[i].rated]) {
+    countNum[movies[i].rated] = 1;
+  } else {
+    countNum [movies[i].rated] += 1; 
+  }
+}
+ return countNum;
+}
 
 /**
  * findById()
@@ -83,7 +135,15 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  
+  for (let i = 0; i < movies.length; i ++) {
+    if (movies[i].imdbID === id) {
+      return movies[i];
+    }
+  }
+  return null
+}
 
 /**
  * filterByGenre()
@@ -105,7 +165,22 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  let genred = [];
+ for (let i = 0; i < movies.length; i++) {
+   lcgar = genre.toLowerCase()
+ lnona = movies[i].genre.toLowerCase() 
+
+   if (lnona.includes(lcgar)){
+     genred.push(movies[i])
+   }
+ }
+ return genred;
+   }
+  
+ 
+ 
+
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +204,14 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies) {
+  // let release = 0;
+  // for (i = 0; i < movies.length; i++) {
+  //   if (!typeof released === number ) {
+
+  //   }
+    }
+  
 
 /**
  * getBiggestBoxOfficeMovie()
