@@ -28,7 +28,16 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-function getAllMovieTitles() {}
+function getAllMovieTitles(movies) {
+  if (!movies) {
+    return movies;
+  }
+  let filmList = [];
+  for (let title of movies) {
+    filmList.push(title.title);
+  }
+  return filmList;
+}
 
 /**
  * getHighestMetascore()
@@ -41,7 +50,19 @@ function getAllMovieTitles() {}
  *  getHighestMetascore(movies);
  *  //> 96
  */
-function getHighestMetascore() {}
+function getHighestMetascore(movies) {
+  if (!movies) {
+    return movies;
+  }
+  let highestScore = 0;
+  for (let film of movies) {
+    if (parseInt(film.metascore) > highestScore) {
+      //console.log(film.metascore);
+      highestScore = parseInt(film.metascore);
+    }
+  }
+  return highestScore;
+}
 
 /**
  * getAverageIMDBRating()
@@ -54,7 +75,26 @@ function getHighestMetascore() {}
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-function getAverageIMDBRating() {}
+function getAverageIMDBRating(movies) {
+  //console.log(movies.length);
+  if (!movies.length) {
+    return 0;
+  }
+  let imdbSum = 0;
+  let scoreArray = [];
+  for (let film of movies) {
+    for (source of film.ratings) {
+      if (source.source == "Internet Movie Database") {
+        let currentScore = source.value.split("/", 1);
+        scoreArray.push(currentScore);
+      }
+    }
+  }
+  for (score of scoreArray) {
+    imdbSum += parseFloat(score);
+  }
+  return imdbSum / scoreArray.length;
+}
 
 /**
  * countByRating()
@@ -67,7 +107,21 @@ function getAverageIMDBRating() {}
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating() {}
+function countByRating(movies) {
+  if (!movies.length) {
+    return {};
+  }
+  let boxOffice = {};
+  for (let film of movies) {
+    if (!boxOffice[film.rated]) {
+      boxOffice[film.rated] = 1;
+    } else {
+      boxOffice[film.rated]++;
+    }
+  }
+
+  return boxOffice;
+}
 
 /**
  * findById()
@@ -83,7 +137,14 @@ function countByRating() {}
       // Toy Story 4
     };
  */
-function findById() {}
+function findById(movies, id) {
+  for (let film of movies) {
+    if (film.imdbID == id) {
+      return film;
+    }
+  }
+  return null;
+}
 
 /**
  * filterByGenre()
@@ -105,7 +166,24 @@ function findById() {}
  *  filterByGenre(movies, "Horror")
  *  //> []
  */
-function filterByGenre() {}
+function filterByGenre(movies, genre) {
+  let boxOffice = [];
+  if (!movies.length) {
+    return [];
+  }
+  genre = genre.toLowerCase();
+  for (let film of movies) {
+    let genre2 = film.genre.split(",");
+    for (let type of genre2) {
+      type = type.toLowerCase();
+      if (type.trim() == genre) {
+        //Forgot to account for the spaces after the comma - it works, but definitely would appreciate input on if there is a "better" way.
+        boxOffice.push(film);
+      }
+    }
+  }
+  return boxOffice;
+}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -129,7 +207,18 @@ function filterByGenre() {}
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear() {}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
+  let boxOffice = [];
+
+  for (let film of movies) {
+    let released = film.released.split(" ");
+    if (parseInt(released[2]) <= year) {
+      boxOffice.push(film);
+    }
+  }
+
+  return boxOffice;
+}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -142,7 +231,25 @@ function getAllMoviesReleasedAtOrBeforeYear() {}
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+  let biggestPull = 0;
+  let biggestDraw;
+
+  if (!movies.length){
+    return null;
+  }
+
+  for (let film of movies) {
+    let money = film.boxOffice.substring(1);
+    money = money.split(",");
+    money = Number(money.join('')); // I know I can do the prev. 3 lines in one but I definitely need practice on that
+    if (money > biggestPull){
+      biggestPull = money;
+      biggestDraw = film.title;
+    }    
+  }
+  return biggestDraw;
+}
 
 // Do not change anything below this line.
 module.exports = {
