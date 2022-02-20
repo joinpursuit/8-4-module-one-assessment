@@ -245,11 +245,12 @@ function getBiggestBoxOfficeMovie(movies) {
   let biggestMovie = 0;
 
 
-  for(let cinema of movies) {
-    let boxOfficeNumber = parseFloat(cinema.boxOffice.replace (/\$|,/g, ''));
+  for(let i = 0; i < movies.length; i++) {
+    let boxOfficeNumber = parseFloat(movies[i].boxOffice.replace (/\$|,/g, ''));
     if(Number(boxOfficeNumber) > biggestMovie) {
       biggestMovie = Number(boxOfficeNumber)
-      return cinema.title;
+      console.log(biggestMovie)
+      return movies[i].title
     }
   }
   return null;
