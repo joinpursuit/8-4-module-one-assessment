@@ -244,8 +244,8 @@ if (movies.length === 0){
 }
 
 for (i = 0; i < movies.length; i++){
-  let movieYear = movies[i].released;
-  let newYear = movieYear.substr(movieYear.length-4,movieYear.length);
+  let movieYear = movies[i].released;//get the string of the movie release date
+  let newYear = movieYear.substr(movieYear.length-4,movieYear.length);//cut the string so I can get the year part only
   //console.log( newYear);
  if (parseInt(newYear) <= year){
 result.push(movies[i]);
@@ -269,7 +269,30 @@ return result;
  *  getBiggestBoxOfficeMovie(movies);
  *  //> "Incredibles 2"
  */
-function getBiggestBoxOfficeMovie() {}
+function getBiggestBoxOfficeMovie(movies) {
+let result = "";
+let biggestProfit = 0;
+
+if (movies.length === 0){
+  return null;
+}
+
+for (i = 0; i < movies.length; i++){
+//  let boxOfficeString = movies[i].boxOffice.substr(1,movies[i].boxOffice.length);
+let boxOfficeString = movies[i].boxOffice.replace(/[.,$]/g,"")
+//console.log(boxOfficeString);
+  
+  //console.log(typeof (movies[i].boxOffice));
+  if (parseInt(boxOfficeString) > biggestProfit){
+    biggestProfit = parseInt(boxOfficeString);
+    result = movies[i].title;
+  }
+}
+
+
+
+return result;
+}
 
 // Do not change anything below this line.
 module.exports = {
