@@ -29,11 +29,11 @@ const exampleMovies = require("./movies");
     ];
  */
 function getAllMovieTitles(movies) {
-  let moviesArray = [];
+  let moviesTitlesArray = [];
   for (let movie of movies){
-    moviesArray.push(movie.title) 
+    moviesTitlesArray.push(movie.title) 
   }
-return moviesArray;
+return moviesTitlesArray;
 }
 
 /**
@@ -49,9 +49,9 @@ return moviesArray;
  */
 function getHighestMetascore(movies) {
   let highestMetascore = 0
-  for (let i = 0; i < movies.length; i++) {
-    if (highestMetascore < movies[i].metascore * 1) {
-      highestMetascore = movies[i].metascore * 1;
+  for (let movie of movies) {
+    if (highestMetascore < movie.metascore * 1) {
+      highestMetascore = movie.metascore * 1;
     }
   }
   return highestMetascore
@@ -71,8 +71,8 @@ function getHighestMetascore(movies) {
 function getAverageIMDBRating(movies) {
   let averageIMDBRating = 0;
   let iMDBRatingTotal = 0;
-  for (let i = 0; i < movies.length; i++) {
-    iMDBRatingTotal += movies[i].imdbRating * 1;
+  for (let [i,movie] of movies.entries()) {
+    iMDBRatingTotal += movie.imdbRating * 1;
     averageIMDBRating = iMDBRatingTotal / (i + 1)
   }
   return averageIMDBRating;
@@ -90,15 +90,15 @@ function getAverageIMDBRating(movies) {
  *  //> { G: 3, PG: 7 }
  */
 function countByRating(movies) {
-  let movieByRating = {};
+  let movieRatingCount = {};
   for (let movie of movies) {
-    if (!movieByRating[movie.rated]) {
-      movieByRating[movie.rated] = 1
+    if (!movieRatingCount[movie.rated]) {
+      movieRatingCount[movie.rated] = 1
     } else {
-      movieByRating[movie.rated] += 1;
+      movieRatingCount[movie.rated] += 1;
     }
   }
-  return movieByRating;
+  return movieRatingCount;
 }
 
 /**
@@ -147,15 +147,15 @@ function findById(movies, id) {
  *  //> []
  */
 function filterByGenre(movies, genre) {
-  let movieFilteredByGenre = [];
+  let moviesFilteredByGenre = [];
   let newGenre = genre.toLowerCase();
   let cleanGenre = newGenre.charAt(0).toUpperCase() + newGenre.slice(1);
-  for (let i = 0; i < movies.length; i++) {
-    if (movies[i].genre.includes(cleanGenre)) {
-      movieFilteredByGenre.push(movies[i])
+  for (let  movie of movies) {
+    if (movie.genre.includes(cleanGenre)) {
+      moviesFilteredByGenre.push(movie)
     }
   }
-  return movieFilteredByGenre;
+  return moviesFilteredByGenre;
 }
 
 /**
@@ -181,15 +181,15 @@ function filterByGenre(movies, genre) {
     ];
  */
 function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-  let movieFilteredByGenre = [];
-  for (let i = 0; i < movies.length; i++) {
-    let releaseYear = movies[i].released.split(' ')
+  let moviesReleasedAtOrBeforeYear = [];
+  for (let  movie of movies) {
+    let releaseYear = movie.released.split(' ')
     releaseYear = releaseYear[2] * 1
     if (releaseYear <= year) {
-      movieFilteredByGenre.push(movies[i])
+      moviesReleasedAtOrBeforeYear.push(movie)
     }
   }
-  return movieFilteredByGenre;
+  return moviesReleasedAtOrBeforeYear;
 }
 
 
@@ -208,11 +208,11 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
 function getBiggestBoxOfficeMovie(movies) {
   let biggestBoxOfficeMovieAmount = 0
   let biggestBoxOfficeMovieName = null;
-  for (let i = 0; i < movies.length; i++) {
-    let movieBoxOffice = parseInt(movies[i].boxOffice.substring(1)) 
+  for (let  movie of movies) {
+    let movieBoxOffice = parseInt(movie.boxOffice.substring(1)) 
     if (biggestBoxOfficeMovieAmount < movieBoxOffice) {
       biggestBoxOfficeMovieAmount = movieBoxOffice;
-      biggestBoxOfficeMovieName = movies[i].title;
+      biggestBoxOfficeMovieName = movie.title;
     }
   }
   return biggestBoxOfficeMovieName;
