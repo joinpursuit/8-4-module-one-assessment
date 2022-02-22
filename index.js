@@ -173,7 +173,7 @@ function filterByGenre(moives, genra) {
   for (let i = 0; i < movies.length; i++) {
   
 
-    }
+    
   }
   return filterGenre
 }
