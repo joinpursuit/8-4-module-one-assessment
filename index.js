@@ -30,7 +30,7 @@ const exampleMovies = require("./movies");
  */
 function getAllMovieTitles(movies) {
   let movieTitles = [];
-  for (let i = 0; i < movies.length; i++){
+  for (let i = 0; i < movies.length; i++) {
     movieTitles.push(movies[i].title);
   }
   return movieTitles;
@@ -48,18 +48,13 @@ function getAllMovieTitles(movies) {
  *  //> 96
  */
 function getHighestMetascore(movies) {
-  if (movies.length === 0) {
-    return 0;
-  }
-  let firstMetascore = Number(movies[0].metascore);
-  for (let i = 0; i < movies.length; i++){
-    if (Number(movies[i].metascore) > firstMetascore){
+  let firstMetascore = 0;
+  for (let i = 0; i < movies.length; i++) {
+    if (Number(movies[i].metascore) > firstMetascore) {
       firstMetascore = Number(movies[i].metascore);
     }
   }
   return firstMetascore;
-
-
 }
 
 /**
@@ -81,8 +76,7 @@ function getAverageIMDBRating(movies) {
    for (let i = 0; i < movies.length; i++) {
      average = average + Number(movies[i].imdbRating);
    }
-
-  return Number((average / movies.length).toFixed(2)) ;
+  return Number((average / movies.length).toFixed(2));
 }
 
 /**
@@ -101,23 +95,13 @@ function countByRating(movies) {
   if (movies.length === 0) {
     return movieKeys;
   }
-  let count = 0;
-  let movieRated = [];
-  for (let i = 0; i < movies.length; i++){
-    movieRated.push(movies[i].rated);
-  }
-  movieRated.sort();
-  let firstRated = movieRated[0];
-  for (let i = 0; i < movieRated.length; i++){
-    if (movieRated[i] === firstRated){
-      count ++;  
+  for (let i = 0; i < movies.length; i++) {
+    if (movieKeys[movies[i].rated]) {
+      movieKeys[movies[i].rated] ++;
     } else {
-      count = 1;
-      firstRated = movieRated[i];
+      movieKeys[movies[i].rated] = 1;
     }
-    movieKeys[movieRated[i]] = count;
   }
-
   return movieKeys;
 }
 
@@ -136,19 +120,12 @@ function countByRating(movies) {
     };
  */
 function findById(movies, id) {
-  let matchingId = {};
-  if (movies.length === 0) {
-    return null;
-  } 
-  for (let i = 0; i < movies.length; i++){
-    if (movies[i].imdbID === id){
-      matchingId = movies[i];
+  for (let i = 0; i < movies.length; i++) {
+    if (movies[i].imdbID === id) {
+      return movies[i];
     }
   }
-  if (Object.keys(matchingId).length === 0){
-    return null;
-  }
-  return matchingId;
+  return null;
 }
 
 /**
@@ -173,9 +150,8 @@ function findById(movies, id) {
  */
 function filterByGenre(movies, genre) {
   let moviesGenre = [];
-  let newGenre = (genre.slice(genre.charAt(0),1)).toUpperCase() + (genre.slice(1,genre.length)).toLowerCase();
   for (let i = 0; i < movies.length; i++) {
-    if (movies[i].genre.includes(newGenre)) {
+    if (movies[i].genre.toLowerCase().includes(genre.toLowerCase())) {
      moviesGenre.push(movies[i]);
     }
   }
@@ -209,7 +185,8 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
   let movieMatchYear = [];
  
   for (let i = 0; i < movies.length; i++) {
-   if(Number((movies[i].released).slice(movies[i].released.length - 4, movies[i].released.length)) <= year) {
+    let current = movies[i].released;
+   if (Number((current).slice(current.length - 4, current.length)) <= year) {
     movieMatchYear.push(movies[i]);
    }
   }
@@ -228,19 +205,16 @@ function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
  *  //> "Incredibles 2"
  */
 function getBiggestBoxOfficeMovie(movies) {
-  if (movies.length === 0){
+  if (movies.length === 0) {
     return null;
   }
-  let movieName = "";
-  let highestBox = Number((((movies[0].boxOffice).slice(1,movies[0].boxOffice.length)).replace(",","")).replace(",",""));
-  for (let i = 0; i < movies.length; i++){
-    if ((Number((((movies[i].boxOffice).slice(1,movies[i].boxOffice.length)).replace(",","")).replace(",",""))) > highestBox){
-      highestBox = Number((((movies[i].boxOffice).slice(1,movies[i].boxOffice.length)).replace(",","")).replace(",",""));
-    }
-  }
-  for (let i = 0; i < movies.length; i++){
-    if (Number((((movies[i].boxOffice).slice(1,movies[i].boxOffice.length)).replace(",","")).replace(",","")) === highestBox){
-      movieName = movies[i].title;
+  let movieName;
+  let highestBox = 0;
+  for (let movie of movies) {
+    let comparer = movie.boxOffice;
+    if ((Number((comparer).replace(/\$|,/g,""))) > highestBox) {
+      highestBox = (Number((comparer).replace(/\$|,/g,"")));
+      movieName = movie.title;
     }
   }
   return movieName;
