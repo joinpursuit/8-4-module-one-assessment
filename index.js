@@ -3,8 +3,8 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
-const movies = require("./movies");
-const exampleMovies = require("./movies");
+const movies = require('./movies');
+const exampleMovies = require('./movies');
 // Do not change the line above.
 
 /**
@@ -29,14 +29,20 @@ const exampleMovies = require("./movies");
       "James and the Giant Peach",
     ];
  */
-// 1. loop through an array of object movie titles {return all titles}
-// 2. checking if array is empty, if so return []
-//
-function getAllMovieTitles(movies = []) {
-es
-  }
+// Plan: Return an array of strings that represent all movie titles.
+// Steps:
+// 1. Create an empty array.
+// 2. Set up a `for...of` loop
+// 3. As we iterate through movies.title, we push into empty array.
 
+function getAllMovieTitles(movies) {
+	const movieTitles = [];
 
+	for (let movie of movies) {
+		movieTitles.push(movie.title);
+	}
+	return movieTitles;
+}
 
 /**
  * getHighestMetascore()
@@ -50,11 +56,28 @@ es
  *  //> 96
  */
 
-function getHighestMetascore(movies) {
- 
-}
-  
+// Plan: Loop through the movies and find the highest metascore.
+// Steps:
+// 1. Create a variable to hold the highest score, but start with 0.
+// 2. Loop through the movies array with `for...of` loop.
+// 3. Get a handle on the `movie.metascore` (get a hold of that value).
+// 3.5. Convert string to number - `Number()` constructor
+// 4. condition - compare value and metascore
+// 5. If metascore is bigger than value, set value equal to metascore.
+// 6. Return `highestValueSoFar`
 
+function getHighestMetascore(movies) {
+	let highestValueSoFar = 0;
+
+	for (let movie of movies) {
+		let num = Number(movie.metascore);
+		if (num > highestValueSoFar) {
+			highestValueSoFar = num;
+		}
+	}
+
+	return highestValueSoFar;
+}
 
 /**
  * getAverageIMDBRating()
@@ -67,11 +90,30 @@ function getHighestMetascore(movies) {
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-// 1. loop through each imdbrating 
-// 2. convert or average out imbd rating
-// 3. return all results
-function getAverageIMDBRating(movies) {
 
+// Plan:
+// Steps:
+// 1. Declare a variable and set it to 0.
+// 2. Loop through movies
+// 3. Get a handle of `movie.imdbRating`
+// 4. Add up each of the imdbRating values and divide by array.length
+// 5. Once we get that value, we add it to the variable
+// 6. Divide total by length of the array
+// 7. Return the variable
+
+function getAverageIMDBRating(movies) {
+	let imdbRatingsTotal = 0;
+
+	if (movies.length < 1) {
+		return 0;
+	}
+
+	for (let movie of movies) {
+		imdbRatingsTotal += Number(movie.imdbRating);
+	}
+	imdbRatingsTotal /= movies.length;
+
+	return imdbRatingsTotal;
 }
 
 /**
@@ -85,9 +127,7 @@ function getAverageIMDBRating(movies) {
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating(movies) {
-
-}
+function countByRating(movies) {}
 
 /**
  * findById()
@@ -103,9 +143,7 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById(movies, id) {
- 
-}
+function findById(movies, id) {}
 
 /**
  * filterByGenre()
@@ -128,9 +166,7 @@ function findById(movies, id) {
  *  //> []
  */
 // not enough time
-function filterByGenre(moives, genra) {
-
-}
+function filterByGenre(moives, genra) {}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -154,9 +190,7 @@ function filterByGenre(moives, genra) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-
-}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -173,12 +207,12 @@ function getBiggestBoxOfficeMovie() {}
 
 // Do not change anything below this line.
 module.exports = {
-  getAllMovieTitles,
-  getHighestMetascore,
-  getAverageIMDBRating,
-  countByRating,
-  findById,
-  filterByGenre,
-  getAllMoviesReleasedAtOrBeforeYear,
-  getBiggestBoxOfficeMovie,
+	getAllMovieTitles,
+	getHighestMetascore,
+	getAverageIMDBRating,
+	countByRating,
+	findById,
+	filterByGenre,
+	getAllMoviesReleasedAtOrBeforeYear,
+	getBiggestBoxOfficeMovie,
 };
