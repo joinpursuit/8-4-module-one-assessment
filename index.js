@@ -33,12 +33,7 @@ const exampleMovies = require("./movies");
 // 2. checking if array is empty, if so return []
 //
 function getAllMovieTitles(movies = []) {
-  let allTitles = [];
-  for (let i = 0; i < movies.length; i++) {
-      allTitles.push(movies[i].title)
-    
-   }
-   return allTitles
+es
   }
 
 
@@ -54,24 +49,9 @@ function getAllMovieTitles(movies = []) {
  *  getHighestMetascore(movies);
  *  //> 96
  */
-// default to 0 if array is empty
-// 1. with a variable of starting from the first movie 
-// loop through an array of objects 
-// 2. compare the "metascore" key value
-// 3. return the highest "metascore" value
+
 function getHighestMetascore(movies) {
-  // let highestMetascore = movies[0].metascore
-  // let theScore = 0
-  if (movies.length < 1) {
-    return 0
-  }
-  let highestMetascore = 0
-  for (let i = 0; i < movies.length; i++) {
-    if (Number(movies[i].metascore) > highestMetascore) {
-      highestMetascore = Number(movies[i].metascore);
-    }
-  }
-  return highestMetascore;
+ 
 }
   
 
@@ -91,12 +71,7 @@ function getHighestMetascore(movies) {
 // 2. convert or average out imbd rating
 // 3. return all results
 function getAverageIMDBRating(movies) {
-let meanRating = 0;
 
-  for(movie of movies){
-    meanRating = meanRating + Number(movie.imdbRating) / movies.length;
-  }
-  return meanRating;
 }
 
 /**
@@ -111,14 +86,7 @@ let meanRating = 0;
  *  //> { G: 3, PG: 7 }
  */
 function countByRating(movies) {
-  let ratingCount = {}
 
-  for (let i = 0; i < movies.length; i++) {
-    if (ratingCount[movies[i].rated]) {
-      retingCount[movies[i].rated] = 1;
-    }
-  }
-  return ratingCount;
 }
 
 /**
@@ -136,12 +104,7 @@ function countByRating(movies) {
     };
  */
 function findById(movies, id) {
-  for (movie of movies) {
-    if (movie.imdbID === id) {
-      return movie
-    }
-  }
-  return null;
+ 
 }
 
 /**
@@ -166,16 +129,7 @@ function findById(movies, id) {
  */
 // not enough time
 function filterByGenre(moives, genra) {
-  if (movies.length === 0) {
-    return [];
-  }
-  let filterGenre = [];
-  for (let i = 0; i < movies.length; i++) {
-  
 
-    
-  }
-  return filterGenre
 }
 
 /**
