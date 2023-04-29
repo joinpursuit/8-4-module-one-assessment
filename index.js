@@ -3,8 +3,8 @@
 
   Keep in mind that your functions must still have and use a parameter for accepting all movies.
 */
-const movies = require("./movies");
-const exampleMovies = require("./movies");
+const movies = require('./movies');
+const exampleMovies = require('./movies');
 // Do not change the line above.
 
 /**
@@ -32,11 +32,14 @@ const exampleMovies = require("./movies");
 // 1. loop through an array of object movie titles {return all titles}
 // 2. checking if array is empty, if so return []
 //
-function getAllMovieTitles(movies = []) {
-es
-  }
+function getAllMovieTitles(movies) {
+	const movieTitles = [];
 
-
+	for (let movie of movies) {
+		movieTitles.push(movie.title);
+	}
+	return movieTitles;
+}
 
 /**
  * getHighestMetascore()
@@ -50,11 +53,7 @@ es
  *  //> 96
  */
 
-function getHighestMetascore(movies) {
- 
-}
-  
-
+function getHighestMetascore(movies) {}
 
 /**
  * getAverageIMDBRating()
@@ -67,12 +66,10 @@ function getHighestMetascore(movies) {
  *  getAverageIMDBRating(movies);
  *  //> 7.76
  */
-// 1. loop through each imdbrating 
+// 1. loop through each imdbrating
 // 2. convert or average out imbd rating
 // 3. return all results
-function getAverageIMDBRating(movies) {
-
-}
+function getAverageIMDBRating(movies) {}
 
 /**
  * countByRating()
@@ -85,9 +82,7 @@ function getAverageIMDBRating(movies) {
  *  countByRating(movies);
  *  //> { G: 3, PG: 7 }
  */
-function countByRating(movies) {
-
-}
+function countByRating(movies) {}
 
 /**
  * findById()
@@ -103,9 +98,7 @@ function countByRating(movies) {
       // Toy Story 4
     };
  */
-function findById(movies, id) {
- 
-}
+function findById(movies, id) {}
 
 /**
  * filterByGenre()
@@ -128,9 +121,7 @@ function findById(movies, id) {
  *  //> []
  */
 // not enough time
-function filterByGenre(moives, genra) {
-
-}
+function filterByGenre(moives, genra) {}
 
 /**
  * getAllMoviesReleasedAtOrBeforeYear()
@@ -154,9 +145,7 @@ function filterByGenre(moives, genra) {
       }
     ];
  */
-function getAllMoviesReleasedAtOrBeforeYear(movies, year) {
-
-}
+function getAllMoviesReleasedAtOrBeforeYear(movies, year) {}
 
 /**
  * getBiggestBoxOfficeMovie()
@@ -173,12 +162,12 @@ function getBiggestBoxOfficeMovie() {}
 
 // Do not change anything below this line.
 module.exports = {
-  getAllMovieTitles,
-  getHighestMetascore,
-  getAverageIMDBRating,
-  countByRating,
-  findById,
-  filterByGenre,
-  getAllMoviesReleasedAtOrBeforeYear,
-  getBiggestBoxOfficeMovie,
+	getAllMovieTitles,
+	getHighestMetascore,
+	getAverageIMDBRating,
+	countByRating,
+	findById,
+	filterByGenre,
+	getAllMoviesReleasedAtOrBeforeYear,
+	getBiggestBoxOfficeMovie,
 };
