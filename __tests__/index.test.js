@@ -59,7 +59,7 @@ describe("getHighestMetascore()", () => {
   });
 });
 
-describe("getAverageIMDBRating()", () => {
+describe.only("getAverageIMDBRating()", () => {
   test("should return the average IMDB rating across all movies", () => {
     const actual = getAverageIMDBRating(movies);
     const expected = 7.76;
