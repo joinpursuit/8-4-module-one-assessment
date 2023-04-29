@@ -29,9 +29,7 @@ const exampleMovies = require('./movies');
       "James and the Giant Peach",
     ];
  */
-// 1. loop through an array of object movie titles {return all titles}
-// 2. checking if array is empty, if so return []
-//
+
 function getAllMovieTitles(movies) {
 	const movieTitles = [];
 
