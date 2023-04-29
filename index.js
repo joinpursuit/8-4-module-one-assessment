@@ -29,6 +29,11 @@ const exampleMovies = require('./movies');
       "James and the Giant Peach",
     ];
  */
+// Plan: Return an array of strings that represent all movie titles.
+// Steps:
+// 1. Create an empty array.
+// 2. Set up a `for...of` loop
+// 3. As we iterate through movies.title, we push into empty array.
 
 function getAllMovieTitles(movies) {
 	const movieTitles = [];
@@ -51,7 +56,28 @@ function getAllMovieTitles(movies) {
  *  //> 96
  */
 
-function getHighestMetascore(movies) {}
+// Plan: Loop through the movies and find the highest metascore.
+// Steps:
+// 1. Create a variable to hold the highest score, but start with 0.
+// 2. Loop through the movies array with `for...of` loop.
+// 3. Get a handle on the `movie.metascore` (get a hold of that value).
+// 3.5. Convert string to number - `Number()` constructor
+// 4. condition - compare value and metascore
+// 5. If metascore is bigger than value, set value equal to metascore.
+// 6. Return `highestValueSoFar`
+
+function getHighestMetascore(movies) {
+	let highestValueSoFar = 0;
+
+	for (let movie of movies) {
+		let num = Number(movie.metascore);
+		if (num > highestValueSoFar) {
+			highestValueSoFar = num;
+		}
+	}
+
+	return highestValueSoFar;
+}
 
 /**
  * getAverageIMDBRating()
